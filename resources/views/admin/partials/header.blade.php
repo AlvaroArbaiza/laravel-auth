@@ -23,7 +23,7 @@
 
                 {{-- work --}}
                 <li class="nav-item">
-                    <a class="nav-link text-white-50" href="#">{{ __('Work') }}</a>
+                    <a class="nav-link text-white-50" href="{{url('admin/work') }}">{{ __('Work') }}</a>
                 </li>
 
                 {{-- about --}}

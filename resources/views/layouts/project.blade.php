@@ -12,7 +12,7 @@
 <body class="bg-black">
 
     {{-- header importato con @include --}}
-    @include('guest.partials.header')
+    @include('admin.partials.header')
 
     <main>
         @yield('content')

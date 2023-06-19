@@ -1,4 +1,9 @@
-@extends('layouts.guest')
+@extends('layouts.project')
+
+@section('title')
+    Laravel | Dashboard
+@endsection
+
 @section('content')
 
     <section class="jumbotron mt-5 mx-5">
