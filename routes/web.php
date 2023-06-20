@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('guest.dashboard');
 });
 
-
+// MIDDLEWARE: metodo che consente l'accesso solo agli utenti loggati
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -28,7 +28,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create'); 
     }
 
     /**
@@ -39,7 +39,37 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validation
+        $request->validate(
+            [
+                'title' => 'required|unique:projects|max:50',
+                'description' => 'required',
+                'customer' => 'required',
+                'type_customer' => 'required|max:30',
+                'price' => 'required|max:15',
+                'created' => 'required|max:15',
+            ],
+            [
+                'title.required' => 'Il campo Titolo è richiesto',
+                'title.unique' => 'Il campo Titolo deve eseere univoco e quello che hai scelto è già presente',
+                'title.max' => 'Il campo Titolo non deve superare i 50 caratteri',
+                'description.required' => 'Il campo Descrizione è richiesto',
+                'price.required' => 'Il campo Costo è richiesto',
+                'customer.required' => 'Il campo Cliente è richiesto',
+                'type_customer.required' => 'Il campo Settore è richiesto',
+                'created.required' => 'Il campo Data è richiesto',
+            ]
+        );
+        
+        // associamo a una variabile i dati passati con il form        
+        $form_data = $request->all();
+
+        $newProject = new Project();
+
+        $newProject->fill($form_data);
+        $newProject->save();
+
+        return redirect()->route('admin.work.index')->with('success', 'Creazione del fumetto completata con successo!');
     }
 
     /**
@@ -50,7 +80,9 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = Project::findOrFail($id);
+
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -59,9 +91,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -71,9 +103,38 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        // validation
+        $request->validate(
+            [
+                'title' => 'required|unique:projects|max:50'.$project->id,
+                'description' => 'required',
+                'customer' => 'required',
+                'type_customer' => 'required|max:30',
+                'price' => 'required|max:15',
+                'created' => 'required|max:15',
+            ],
+            [
+                'title.required' => 'Il campo Titolo è richiesto',
+                'title.unique' => 'Il campo Titolo deve eseere univoco e quello che hai scelto è già presente',
+                'title.max' => 'Il campo Titolo non deve superare i 50 caratteri',
+                'description.required' => 'Il campo Descrizione è richiesto',
+                'price.required' => 'Il campo Costo è richiesto',
+                'customer.required' => 'Il campo Cliente è richiesto',
+                'type_customer.required' => 'Il campo Settore è richiesto',
+                'created.required' => 'Il campo Data è richiesto',
+            ]
+        );
+
+        // associamo a una variabile i dati passati con il form
+        $form_data = $request->all();
+
+        // aggiorniamo l'elemento passato con il form, usando il metodo update()
+        $project->update($form_data);
+
+        // facciamo un redirect verso la pagina contenente tutti i nostri comic dove possiamo avere una panoramica dei nostri elementi modificati
+        return redirect()->route('admin.work.index');
     }
 
     /**
@@ -82,8 +143,11 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        // cancelliamo l'elemento passato con il metodo destroy
+        $project->delete();
+
+        return redirect()->route('admin.work.index');
     }
 }
