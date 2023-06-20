@@ -47,16 +47,16 @@
             <div class="d-flex justify-content-between">
                 {{-- edit --}}
                 {{-- bottone con rotta che riconduce all'id della tabella dell'elemento selezionato --}}
-                <a href="{{ route('admin.work.edit', $project['id'] ) }}" class="btn btn-info fw-bold">Modifica</a>
+                {{-- <a href="{{ route('work.edit', $project ) }}" class="btn btn-info fw-bold">Modifica</a> --}}
     
                 {{-- delete --}}
                 {{-- Inserisco nell'attributo action la rotta destroy, passando la variabile $project['id'] per cancellare l'elemento corrente --}}
-                <form action="{{ route('admin.work.destroy', $project['id']) }}" method="POST">
+                {{-- <form action="{{ route('work.destroy', $project['id']) }}" method="POST">
     
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger fw-bold">Cancella</button>
-                </form>
+                </form> --}}
             </div>
         </div>
 

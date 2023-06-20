@@ -69,7 +69,7 @@ class ProjectController extends Controller
         $newProject->fill($form_data);
         $newProject->save();
 
-        return redirect()->route('admin.work.index')->with('success', 'Creazione del fumetto completata con successo!');
+        return redirect()->route('projects.index')->with('success', 'Creazione del fumetto completata con successo!');
     }
 
     /**
@@ -78,10 +78,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        $project = Project::findOrFail($id);
-
+        // $project = Project::findOrFail($id);
+        // dd($project);
         return view('admin.projects.show', compact('project'));
     }
 
@@ -91,8 +91,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //  preso l'elemento intero come parametro, lo passo all'interno del file edit.blade.php
     public function edit(Project $project)
-    {
+    {        
         return view('admin.projects.edit', compact('project'));
     }
 
@@ -108,12 +110,12 @@ class ProjectController extends Controller
         // validation
         $request->validate(
             [
-                'title' => 'required|unique:projects|max:50'.$project->id,
+                'title' => 'required|max:50|unique:projects,title,'.$project->id,
                 'description' => 'required',
                 'customer' => 'required',
                 'type_customer' => 'required|max:30',
                 'price' => 'required|max:15',
-                'created' => 'required|max:15',
+                'created' => 'required|date',
             ],
             [
                 'title.required' => 'Il campo Titolo è richiesto',
@@ -134,7 +136,7 @@ class ProjectController extends Controller
         $project->update($form_data);
 
         // facciamo un redirect verso la pagina contenente tutti i nostri comic dove possiamo avere una panoramica dei nostri elementi modificati
-        return redirect()->route('admin.work.index');
+        return redirect()->route('projects.index');
     }
 
     /**
@@ -148,6 +150,6 @@ class ProjectController extends Controller
         // cancelliamo l'elemento passato con il metodo destroy
         $project->delete();
 
-        return redirect()->route('admin.work.index');
+        return redirect()->route('projects.index');
     }
 }

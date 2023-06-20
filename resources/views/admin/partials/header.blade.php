@@ -18,12 +18,12 @@
 
                 {{-- home --}}
                 <li class="nav-item">
-                    <a class="nav-link text-white-50" href="{{url('/') }}">{{ __('Home') }}</a>
+                    <a class="nav-link text-white-50" href="{{route('home') }}">{{ __('Home') }}</a>
                 </li>
 
                 {{-- work --}}
                 <li class="nav-item">
-                    <a class="nav-link text-white-50" href="{{url('admin/work') }}">{{ __('Work') }}</a>
+                    <a class="nav-link text-white-50" href="{{route('projects.index') }}">{{ __('Work') }}</a>
                 </li>
 
                 {{-- about --}}

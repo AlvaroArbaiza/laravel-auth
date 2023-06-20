@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 50)->unique(); // titolo
             $table->text('description'); // descrizione
-            $table->string('slug'); // slug
+            $table->string('slug')->nullable(); // slug
             $table->string('customer', 50); // nome cliente
             $table->string('type_customer', 50); // tipo di cliente
             $table->decimal('price', 8, 2); // costo progetto

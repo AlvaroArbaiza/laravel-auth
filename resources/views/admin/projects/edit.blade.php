@@ -15,7 +15,7 @@
             <h2 class="mb-5">Inserisci tutti i campi per modificare il tuo progetto</h2>
 
             {{-- form --}}
-            <form action="{{ route('admin.work.update', ['work' => $project] ) }}" method="POST">
+            <form action="{{ route('projects.update', $project ) }}" method="POST">
 
                 @csrf
                 @method('PUT')
@@ -73,7 +73,7 @@
                 {{-- created --}}
                 <div class="mb-3">
                     <label for="project_created" class="form-label">Data</label>
-                    <input type="date" class="form-control @error('created') is-invalid @enderror" id="project_created" name="created"  value="{{ old('date') ?? $project['date'] }}">
+                    <input type="date" class="form-control @error('created') is-invalid @enderror" id="project_created" name="created"  value="{{ old('created') ?? $project['created'] }}">
                     {{-- error --}}
                     @error('created')
                         <div class="alert alert-danger">{{ $message }}</div>

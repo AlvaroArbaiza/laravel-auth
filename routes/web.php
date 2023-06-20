@@ -18,16 +18,18 @@ use App\Http\Controllers\Admin\ProjectController;
 
 Route::get('/', function () {
     return view('guest.dashboard');
-});
+})->name('home');
 
 // MIDDLEWARE: metodo che consente l'accesso solo agli utenti loggati
-Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('/work', ProjectController::class);
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+    // per far in modo che l'elemento venga passsato alla funzione di controller deve combaciare con il nome della route definita nel file web
+    Route::resource('/projects', ProjectController::class);
 
 });
 

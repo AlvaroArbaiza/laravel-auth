@@ -15,7 +15,7 @@
             <h2 class="mb-5">Inserisci tutti i campi per generare un nuovo progetto</h2>
 
             {{-- form --}}
-            <form action="{{ route('admin.work.store') }}" method="POST">
+            <form action="{{ route('projects.store') }}" method="POST">
                 @csrf
 
                 {{-- title --}}
