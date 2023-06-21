@@ -78,7 +78,9 @@
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="submit" class="delete btn btn-danger">Cancella</button>
+                                <button type="submit" class="delete btn btn-danger"
+                                    onclick="return confirm('Sicuro di volere eliminare questo elemento?')"    
+                                >Cancella</button>
                             </form>
                             
                         </div>

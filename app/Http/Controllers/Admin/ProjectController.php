@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 // Importazione modello Project
 use App\Models\Admin\Project;
 
+// Importazione file Request
+use App\Http\Requests\StoreProjectRequest;
+
 class ProjectController extends Controller
 {
     /**
@@ -40,33 +43,13 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        // validation
-        $request->validate(
-            [
-                'title' => 'required|unique:projects|max:50',
-                'description' => 'required',
-                'customer' => 'required',
-                'type_customer' => 'required|max:30',
-                'price' => 'required|max:15',
-                'created' => 'required|max:15',
-            ],
-            [
-                'title.required' => 'Il campo Titolo è richiesto',
-                'title.unique' => 'Il campo Titolo deve eseere univoco e quello che hai scelto è già presente',
-                'title.max' => 'Il campo Titolo non deve superare i 50 caratteri',
-                'description.required' => 'Il campo Descrizione è richiesto',
-                'price.required' => 'Il campo Costo è richiesto',
-                'customer.required' => 'Il campo Cliente è richiesto',
-                'type_customer.required' => 'Il campo Settore è richiesto',
-                'created.required' => 'Il campo Data è richiesto',
-            ]
-        );
+    public function store(StoreProjectRequest $request)
+    {        
         
+        $form_data = $request->validated();
         
         // associamo a una variabile i dati passati con il form        
-        $form_data = $request->all();
+        // $form_data = $request->all();
 
         // trasformazione da titolo a slug grazie al metodo statico del model Project creato da noi
         $slug = Project::toSlug($request->title);
@@ -95,7 +78,7 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         // $project = Project::findOrFail($id);
-        // dd($project);
+
         return view('admin.projects.show', compact('project'));
     }
 
@@ -119,29 +102,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        // validation
-        $request->validate(
-            [
-                'title' => 'required|max:50|unique:projects,title,'.$project->id,
-                'description' => 'required',
-                'customer' => 'required',
-                'type_customer' => 'required|max:30',
-                'price' => 'required|max:15',
-                'created' => 'required|date',
-            ],
-            [
-                'title.required' => 'Il campo Titolo è richiesto',
-                'title.unique' => 'Il campo Titolo deve eseere univoco e quello che hai scelto è già presente',
-                'title.max' => 'Il campo Titolo non deve superare i 50 caratteri',
-                'description.required' => 'Il campo Descrizione è richiesto',
-                'price.required' => 'Il campo Costo è richiesto',
-                'customer.required' => 'Il campo Cliente è richiesto',
-                'type_customer.required' => 'Il campo Settore è richiesto',
-                'created.required' => 'Il campo Data è richiesto',
-            ]
-        );
+
+        $form_data = $request->validated();
 
         // associamo a una variabile i dati passati con il form
         $form_data = $request->all();
