@@ -2,7 +2,7 @@
 
 {{-- Head | title --}}
 @section('title')
-    Laravel | Project
+    Laravel | Work - Show
 @endsection
 
 {{-- Main Content --}}
@@ -43,21 +43,6 @@
             </h6>
 
             <p class="card-text">{{ $project['description'] }}</p>
-
-            <div class="d-flex justify-content-between">
-                {{-- edit --}}
-                {{-- bottone con rotta che riconduce all'id della tabella dell'elemento selezionato --}}
-                <a href="{{ route('work.edit', $project ) }}" class="btn btn-info fw-bold">Modifica</a>
-    
-                {{-- delete --}}
-                {{-- Inserisco nell'attributo action la rotta destroy, passando la variabile $project['id'] per cancellare l'elemento corrente --}}
-                <form action="{{ route('work.destroy', $project['id']) }}" method="POST">
-    
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger fw-bold">Cancella</button>
-                </form>
-            </div>
         </div>
 
     </section>

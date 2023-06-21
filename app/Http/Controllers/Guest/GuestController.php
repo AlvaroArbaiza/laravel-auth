@@ -48,7 +48,10 @@ class GuestController extends Controller
      */
     public function show($id)
     {
-        //
+
+        // in questo caso passiamo l'id della tabella
+        $project = Project::findOrFail($id);
+        return view('guest.show', compact('project'));
     }
 
     /**
