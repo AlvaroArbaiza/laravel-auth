@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('type_customer', 50); // tipo di cliente
             $table->decimal('price', 8, 2); // costo progetto
             $table->date('created'); // data creazione progetto
+            $table->string('image')->nullable(); // Immagine
             $table->timestamps();
         });
     }

@@ -30,6 +30,7 @@ class ProjectSeeder extends Seeder
             $newProject->type_customer = $element['type_customer'];
             $newProject->price = $element['price'];
             $newProject->created = $element['created'];
+            $newProject->image = $element['image'];
             $newProject->save();
         }
     }

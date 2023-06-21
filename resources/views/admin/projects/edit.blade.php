@@ -15,7 +15,7 @@
             <h2 class="mb-5">Inserisci tutti i campi per modificare il tuo progetto</h2>
 
             {{-- form --}}
-            <form action="{{ route('projects.update', $project ) }}" method="POST">
+            <form action="{{ route('projects.update', $project ) }}" method="POST" enctype="multipart/form-data">
 
                 @csrf
                 @method('PUT')
@@ -76,6 +76,16 @@
                     <input type="date" class="form-control @error('created') is-invalid @enderror" id="project_created" name="created"  value="{{ old('created') ?? $project['created'] }}">
                     {{-- error --}}
                     @error('created')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- image --}}
+                <div class="mb-3">
+                    <label for="project_image" class="form-label">Immagine</label>
+                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="project_image" name="image">
+                    {{-- error --}}
+                    @error('image')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>

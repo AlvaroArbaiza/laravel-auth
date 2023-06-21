@@ -29,7 +29,8 @@ class StoreProjectRequest extends FormRequest
             'customer' => 'required',
             'type_customer' => 'required|max:30',
             'price' => 'required|max:15',
-            'created' => 'required|max:15'
+            'created' => 'required|max:15',
+            'image' => 'nullable|image'
         ];
     }
 

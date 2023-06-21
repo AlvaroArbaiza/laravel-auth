@@ -12,6 +12,9 @@ use App\Models\Admin\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 
+// Storage
+use Illuminate\Support\Facades\Storage;
+
 class ProjectController extends Controller
 {
     /**
@@ -55,13 +58,23 @@ class ProjectController extends Controller
         // trasformazione da titolo a slug grazie al metodo statico del model Project creato da noi
         $slug = Project::toSlug($request->title);
 
-        // assegnazione e creazione della nuova chiave slug
+        // assegnazione e creazione del nuovo valore $slug
         $form_data['slug'] = $slug;
+
+        // se il file immagine è presente
+        if( $request->hasFile('image')) {
+
+            // generazione path il quale verrà salvato in post_images
+            $img_path = Storage::disk('public')->put('post_images', $request->image);
+
+            // assegnazione e creazione del nuovo valore $img_path
+            $form_data['image'] = $img_path;
+
+        }
 
         /* l'alternativa shortcut al salvataggio delle informazioni
             $newProject = Project::create($form_data);
         */
-
         $newProject = new Project();
 
         $newProject->fill($form_data);

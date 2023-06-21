@@ -20,7 +20,8 @@ class Project extends Model
         'customer',
         'type_customer',
         'price',
-        'created'
+        'created',
+        'image'
     ];
 
     public static function toSlug($title) {

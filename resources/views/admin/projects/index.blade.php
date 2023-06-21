@@ -23,7 +23,8 @@
 
                     {{-- card --}}
                     <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
+                        
+                        <img src="{{ asset('storage/' . $element->image) }}" class="card-img-top" alt="...">
 
                         {{-- card-body --}}
                         <div class="card-body">
