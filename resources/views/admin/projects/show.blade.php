@@ -17,6 +17,11 @@
             {{-- title --}}
             <h4 class="text-uppercase fw-bold">{{ $project['title'] }}</h4>
 
+            {{-- slug --}}
+            <h6 class="card-subtitle mb-2">
+                <span class="text-white-50">Slug Titolo: </span>
+                {{ $project['slug'] }}
+            </h6>
             {{-- cliente --}}
             <h6 class="card-subtitle mb-2">
                 <span class="text-white-50">Cliente: </span>

@@ -35,6 +35,12 @@
                                 </h5>
                             </a>
 
+                            {{-- slug --}}
+                            <h6 class="card-subtitle mb-2">
+                                <span class="text-body-secondary">Slug Titolo: </span>
+                                {{ $element['slug'] }}
+                            </h6>
+
                             {{-- cliente --}}
                             <h6 class="card-subtitle mb-2">
                                 <span class="text-body-secondary">Cliente: </span>

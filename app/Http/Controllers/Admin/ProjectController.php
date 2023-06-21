@@ -64,8 +64,19 @@ class ProjectController extends Controller
             ]
         );
         
+        
         // associamo a una variabile i dati passati con il form        
         $form_data = $request->all();
+
+        // trasformazione da titolo a slug grazie al metodo statico del model Project creato da noi
+        $slug = Project::toSlug($request->title);
+
+        // assegnazione e creazione della nuova chiave slug
+        $form_data['slug'] = $slug;
+
+        /* l'alternativa shortcut al salvataggio delle informazioni
+            $newProject = Project::create($form_data);
+        */
 
         $newProject = new Project();
 

@@ -5,6 +5,8 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Str;
+
 class Project extends Model
 {
     use HasFactory;
@@ -20,4 +22,8 @@ class Project extends Model
         'price',
         'created'
     ];
+
+    public static function toSlug($title) {
+        return Str::slug($title, '-');
+    }
 }
