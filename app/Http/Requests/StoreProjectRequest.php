@@ -30,7 +30,7 @@ class StoreProjectRequest extends FormRequest
             'type_customer' => 'required|max:30',
             'price' => 'required|max:15',
             'created' => 'required|max:15',
-            'image' => 'nullable|image'
+            'image' => 'nullable|image|max:6000'
         ];
     }
 

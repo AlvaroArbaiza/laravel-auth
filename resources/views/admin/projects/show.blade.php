@@ -14,6 +14,8 @@
         {{-- projectbook --}}
         <div class="d-flex flex-column pe-5">
 
+            <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top" alt="...">
+
             {{-- title --}}
             <h4 class="text-uppercase fw-bold">{{ $project['title'] }}</h4>
 

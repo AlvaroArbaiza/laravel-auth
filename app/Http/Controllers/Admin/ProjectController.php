@@ -121,6 +121,27 @@ class ProjectController extends Controller
 
         $form_data = $request->validated();
 
+        // trasformazione da titolo a slug grazie al metodo statico del model Project creato da noi
+        $slug = Project::toSlug($request->title);
+
+        // assegnazione e creazione del nuovo valore $slug
+        $form_data['slug'] = $slug;
+
+        // se il file immagine è presente
+        if( $request->hasFile('image')) {
+            
+            // se l'immagine è presente cancellalo dalla cartella
+            if($project->image) {
+                Storage::delete($project->image);
+            }
+            // generazione path il quale verrà salvato in post_images
+            $img_path = Storage::disk('public')->put('post_images', $request->image);
+
+            // assegnazione e creazione del nuovo valore $img_path
+            $form_data['image'] = $img_path;
+
+        }
+
         // associamo a una variabile i dati passati con il form
         $form_data = $request->all();
 
@@ -139,6 +160,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+
+        // se l'immagine è presente cancellalo dalla cartella
+        if($project->image) {
+            Storage::delete($project->image);
+        }
         // cancelliamo l'elemento passato con il metodo destroy
         $project->delete();
 
