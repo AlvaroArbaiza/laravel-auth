@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-md border-bottom border-secondary mx-5 py-3 d-block">
+<nav class="navbar navbar-expand-md mx-5 py-4 d-block">
     <div class="d-flex justify-content-between">
 
         {{-- TITLE - name --}}
-        <a class="d-flex align-items-center link-light link-offset-2" href="{{ url('/') }}">
+        <a class="d-flex align-items-center text-decoration-none text-white" href="{{ url('/') }}">
             <h3 class="text-uppercase">alvaro arbaiza</h3>
         </a>
 
@@ -10,25 +10,26 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        {{-- NAV --}}
+        {{-- NAVBAR --}}
         <div class="collapse navbar-collapse flex-grow-0 pe-2" id="navbarSupportedContent">
 
-            <!-- LISTS -->
+            <!-- lists -->
             <ul class="navbar-nav ml-auto fs-4">
 
-                {{-- home --}}
+                {{-- HOME --}}
                 <li class="nav-item">
                     <a class="nav-link text-white-50" href="{{route('home') }}">{{ __('Home') }}</a>
                 </li>
 
-                {{-- work --}}
+                {{-- WORK :
+                        sono i projects da mostrare agli utenti anche se non sono loggati --}}
                 <li class="nav-item">
-                    <a class="nav-link text-white-50" href="{{route('projects.index') }}">{{ __('Work') }}</a>
+                    <a class="nav-link text-white-50" href="{{route('guest.index') }}">{{ __('Work') }}</a>
                 </li>
 
-                {{-- about --}}
+                {{-- ABOUT --}}
                 <li class="nav-item">
-                    <a class="nav-link text-white-50" href="#">{{ __('About') }}</a>
+                    <a class="nav-link text-white-50" href="{{route('about') }}">{{ __('About') }}</a>
                 </li>
 
                 <!-- DROPDOWN - Authentication Links -->
@@ -48,8 +49,17 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                        {{-- dashboard --}}
                         <a class="dropdown-item" href="{{ url('admin') }}">{{__('Dashboard')}}</a>
+
+                        {{-- profile --}}
                         <a class="dropdown-item" href="{{ url('admin/profile') }}">{{__('Profile')}}</a>
+
+                        {{-- projects --}}
+                        <a class="dropdown-item" href="{{ route('projects.index') }}">{{__('Projects')}}</a>
+
+                        {{-- logout --}}
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}

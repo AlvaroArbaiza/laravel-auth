@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+// Importazione modello Project
 use App\Models\Admin\Project;
 
 class ProjectController extends Controller
@@ -16,6 +17,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
+
+        // assegniamo alla variabile $projects tutti i dati della tabella projects grazie al metodo statico ( Project::All() )
         $projects = Project::All();
 
         return view('admin.projects.index', compact('projects'));

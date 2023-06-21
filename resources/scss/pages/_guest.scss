@@ -2,22 +2,15 @@ main {
     width: 100%;
     
     .jumbotron {
-        height: 350px;
-        text-shadow: -6px 2px 2px #000;
-        background-image: url("../img/Green-coding.png");
-        background-repeat: no-repeat;
-        background-size: 1500px;
         
-        .container {
-        
-            .content {
-                font-size: 3rem !important;
-        
-                h3 {
-                    font-family: 'Lora', serif;
-                    font-size: 3rem !important;
-                }
+        // content
+        .content {
+            font-size: 10rem !important;
+    
+            h3 {
+                font-size: 10rem !important;
             }
         }
+
     }
 }

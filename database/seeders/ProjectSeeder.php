@@ -17,9 +17,10 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        // prendiamo l'array dalla cartella config per ciclarlo e poi usarlo per riempure la tabella
+        // prendiamo l'array dalla cartella config per ciclarlo e poi usarlo per riempire la tabella
         $project = config('projects');
 
+        // ad ogni iterazione creiamo una nuova istanza della classe(new Project) da salvare, assegniamo i valori alle variabili d'istanza e poi la salviamo con save()
         foreach ($project as $element) {
             $newProject = new Project();
             $newProject->title = $element['title'];

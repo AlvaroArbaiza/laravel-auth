@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Guest\GuestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,21 +17,38 @@ use App\Http\Controllers\Admin\ProjectController;
 |
 */
 
-Route::get('/', function () {
-    return view('guest.dashboard');
-})->name('home');
-
+/************************** 
+        A D M I N 
+**************************/
 // MIDDLEWARE: metodo che consente l'accesso solo agli utenti loggati
-Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware([ 'auth', 'verified' ])->prefix('admin')->group(function () {
+    Route::get( '/profile', [ProfileController::class, 'edit'] )->name('profile.edit');
+    Route::patch( '/profile', [ProfileController::class, 'update'] )->name('profile.update');
+    Route::delete( '/profile', [ProfileController::class, 'destroy'] )->name('profile.destroy');
 
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get( '/', [DashboardController::class, 'index'] )->name('admin.dashboard');
 
     // per far in modo che l'elemento venga passsato alla funzione di controller deve combaciare con il nome della route definita nel file web
     Route::resource('/projects', ProjectController::class);
-
 });
+
+/************************** 
+        G U E S T 
+**************************/
+
+// home
+Route::get( '/', function () {
+    return view('guest.index');
+})->name('home');
+
+// about
+Route::get( '/about', function () {
+    return view('guest.about');
+})->name('about');
+
+// work
+Route::resource( 'guest', GuestController::class );
+
+
 
 require __DIR__.'/auth.php';
